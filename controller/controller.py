@@ -11,18 +11,22 @@ class Controller:
         self._mapRepository = MapRepository()
         self._population = None
 
-        position = randint(0, ROWS - 1), randint(0, COLUMNS - 1)
-        while self._mapRepository[position] != 0:
-            position = randint(0, ROWS - 1), randint(0, COLUMNS - 1)
+        self.position = randint(0, ROWS - 1), randint(0, COLUMNS - 1)
+        while self._mapRepository[self.position] != 0:
+            self.position = randint(0, ROWS - 1), randint(0, COLUMNS - 1)
 
-        self._drone = Drone(position[0], position[1])
+        self._drone = Drone(self.position[0], self.position[1])
+
+
+    def get_initial_pos(self):
+        return self.position
 
 
     def getPathFromRepresentation(self, representation):
         xPosition, yPosition = self._drone.position
         path = [(xPosition, yPosition)]
-        for xDirection, yDirection in representation:
-            xPosition, yPosition = xPosition + xDirection, yPosition + yDirection
+        for g in representation:
+            xPosition, yPosition = xPosition + g.choice[0], yPosition + g.choice[1]
             if self._mapRepository.isValidPosition(xPosition, yPosition) and \
                     self._mapRepository[(xPosition, yPosition)] == 1:
                 break
@@ -66,9 +70,9 @@ class Controller:
             offspring.fitness = fitnessFunction(offspring.representation)
 
             if (firstParent.fitness > secondParent.fitness) and (firstParent.fitness > offspring.fitness):
-                self._population[firstPosition] = offspring
+                self._population._population[firstPosition] = offspring
             if (secondParent.fitness > firstParent.fitness) and (secondParent.fitness > offspring.fitness):
-                self._population[secondPosition] = offspring
+                self._population._population[secondPosition] = offspring
 
     def generationalIteration(self, fitnessFunction):
         newPopulation = []
@@ -96,6 +100,7 @@ class Controller:
         bestIndividual = None
 
         for generation in range(1, GENERATIONS + 1):
+            print(generation)
             fitnessAverages.append(self._population.fitnessAverage())
             if bestIndividual is None or bestIndividual.fitness < self._population.bestIndividual().fitness:
                 bestIndividual = self._population.bestIndividual()
@@ -112,6 +117,8 @@ class Controller:
         # run the algorithm
         # return the results and the statistics
 
+        print(self.position)
+
         seEd = randint(0, 4000000)
         seed(seEd)
 
@@ -126,7 +133,7 @@ class Controller:
 
 
     def mapWithDrone(self, image=None):
-        drone = pygame.transform.scale(pygame.image.load("Resources/drona.png"), (SQUARE_HEIGHT, SQUARE_WIDTH))
+        drone = pygame.transform.scale(pygame.image.load("..\\Assets\\drona.png"), (SQUARE_HEIGHT, SQUARE_WIDTH))
         if image is None:
             image = self._mapRepository.mapImage()
         image.blit(drone, (self._drone.position[1] * SQUARE_HEIGHT, self._drone.position[0] * SQUARE_WIDTH))

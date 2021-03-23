@@ -22,7 +22,7 @@ class Individual:
         self._fitness = newFitness
 
     def mutate(self, mutateProbability=MUTATE_PROBABILITY):
-        if random() < mutateProbability:
+        if random.random() < mutateProbability:
             randomGenePosition = randint(0, self._size - 1)
             self._representation[randomGenePosition] = Gene()
 
@@ -39,7 +39,7 @@ class Individual:
         return self, otherParent
 
     def crossover(self, otherParent, crossoverProbability=CROSSOVER_PROBABILITY):
-        if random() < crossoverProbability:
+        if random.random() < crossoverProbability:
             index = randint(1, len(self._representation) - 2)
             newRepresentation = self._representation[:index] + otherParent.representation[index:]
 
