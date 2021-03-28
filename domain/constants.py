@@ -19,8 +19,10 @@ RIGHT = 3
 # define indexes variations
 DRONE_DIRECTIONS = [[-1, 0], [1, 0], [0, 1], [0, -1]]
 
-ROWS = 30
+ROWS = 20
 COLUMNS = 20
+
+WALL = 1
 
 SQUARE_SIDE_SIZE = 20
 SQUARE_WIDTH = 20

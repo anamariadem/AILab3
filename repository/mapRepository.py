@@ -12,6 +12,10 @@ class MapRepository:
         else:
             self._map.randomMap()
 
+    @property
+    def map(self):
+        return self._map
+
     def readFromFile(self, file):
         with open(file, "rb") as f:
             self._map = pickle.load(f)
@@ -21,6 +25,9 @@ class MapRepository:
         with open(file, 'wb') as f:
             pickle.dump(self._map, f)
             f.close()
+
+    def randomMap(self):
+        self._map.randomMap()
 
     def mapImage(self):
         return self._map.image()
