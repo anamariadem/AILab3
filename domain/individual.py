@@ -27,16 +27,16 @@ class Individual:
             self._representation[randomGenePosition] = Gene()
 
 
-    def crossover2X2(self, otherParent, crossoverProbability=CROSSOVER_PROBABILITY):
-        firstOffspring = Individual(self._size)
-        secondOffspring = Individual(self._size)
-        if random() < crossoverProbability:
-            index = randint(1, self._size - 2)
-            firstOffspring._representation = self.representation[:index] + otherParent.representation[index:]
-            secondOffspring._representation = self.representation[index:] + otherParent.representation[:index]
-            return firstOffspring, secondOffspring
-
-        return self, otherParent
+    # def crossover2X2(self, otherParent, crossoverProbability=CROSSOVER_PROBABILITY):
+    #     firstOffspring = Individual(self._size)
+    #     secondOffspring = Individual(self._size)
+    #     if random() < crossoverProbability:
+    #         index = randint(1, self._size - 2)
+    #         firstOffspring._representation = self.representation[:index] + otherParent.representation[index:]
+    #         secondOffspring._representation = self.representation[index:] + otherParent.representation[:index]
+    #         return firstOffspring, secondOffspring
+    #
+    #     return self, otherParent
 
     def crossover(self, otherParent, crossoverProbability=CROSSOVER_PROBABILITY):
         if random.random() < crossoverProbability:

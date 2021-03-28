@@ -18,13 +18,11 @@ class MapRepository:
 
     def readFromFile(self, file):
         with open(file, "rb") as f:
-            self._map = pickle.load(f)
-            f.close()
+            self._map.surface = pickle.load(f)
 
     def saveToFile(self, file):
         with open(file, 'wb') as f:
-            pickle.dump(self._map, f)
-            f.close()
+            pickle.dump(self._map.surface, f)
 
     def randomMap(self):
         self._map.randomMap()

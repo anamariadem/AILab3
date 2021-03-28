@@ -33,13 +33,13 @@ def closePygame():
 
 def movingDrone(currentMap, path, speed=0.5, markSeen=True):
     # animation of a drone on a path
-    screen = initPygame((currentMap.n * COLUMNS, currentMap.m * ROWS))
+    screen = initPygame((currentMap.m * SQUARE_WIDTH, currentMap.n * SQUARE_HEIGHT))
     drona = pygame.image.load("Assets/drona.png")
     for i in range(len(path)):
         screen.blit(image(currentMap), (0, 0))
         if markSeen:
             brick = pygame.Surface((SQUARE_WIDTH, SQUARE_HEIGHT))
-            brick.fill(GREEN)
+            brick.fill(PINK)
             for j in range(i + 1):
                 for direction in DRONE_DIRECTIONS:
                     x = path[j][0]
@@ -58,7 +58,7 @@ def movingDrone(currentMap, path, speed=0.5, markSeen=True):
 
 
 def mapWithDrone(currentMap, dronePosition):
-    screen = initPygame((currentMap.n * COLUMNS, currentMap.m * ROWS))
+    screen = initPygame((currentMap.m * SQUARE_WIDTH, currentMap.n * SQUARE_HEIGHT))
     screen.blit(image(currentMap), (0, 0))
     drone = pygame.image.load("Assets/drona.png")
     screen.blit(drone, (dronePosition[1] * SQUARE_WIDTH, dronePosition[0] * SQUARE_HEIGHT))
@@ -68,7 +68,7 @@ def mapWithDrone(currentMap, dronePosition):
 
 
 def image(currentMap, colour=BLACK, background=WHITE):
-    imagine = pygame.Surface((currentMap.n * COLUMNS, currentMap.m * ROWS))
+    imagine = pygame.Surface((currentMap.m * SQUARE_WIDTH, currentMap.n * SQUARE_HEIGHT))
     brick = pygame.Surface((SQUARE_WIDTH, SQUARE_HEIGHT))
     brick.fill(colour)
     imagine.fill(background)
