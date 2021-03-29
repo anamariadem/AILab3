@@ -11,7 +11,6 @@ class DroneMap:
         self.m = m
         self.surface = np.zeros((self.n, self.m))
 
-
     def randomMap(self, fill=0.2):
         for i in range(self.n):
             for j in range(self.m):
@@ -19,7 +18,7 @@ class DroneMap:
                     self.surface[i][j] = 1
 
     def image(self, colour=BLACK, background=WHITE):
-        imagine = pygame.Surface((SQUARE_WIDTH * COLUMNS, SQUARE_HEIGHT * ROWS))
+        imagine = pygame.Surface((SQUARE_WIDTH * ROWS, SQUARE_HEIGHT * COLUMNS))
         brick = pygame.Surface((SQUARE_WIDTH, SQUARE_HEIGHT))
         brick.fill(colour)
         imagine.fill(background)
@@ -29,7 +28,6 @@ class DroneMap:
                     imagine.blit(brick, (j * SQUARE_WIDTH, i * SQUARE_HEIGHT))
 
         return imagine
-
 
     def __str__(self):
         string = ""
